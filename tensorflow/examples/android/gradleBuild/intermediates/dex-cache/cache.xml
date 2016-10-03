@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/bruno/tensorflow/tensorflow/examples/android/gradleBuild/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="397d2bcab8557eb8587012e755460b86ff547547">
+        <dex dex="/home/bruno/tensorflow/tensorflow/examples/android/gradleBuild/intermediates/transforms/dex/debug/folders/1000/10/instant-run_07d527fd5617e35e039d74a002656fb186b84024/classes.dex" />
+    </item>
+    <item
+        jar="/home/bruno/tensorflow/tensorflow/examples/android/gradleBuild/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="2f379f3d43ad7447c54d0dd2bef0b2580bd55da5">
+        <dex dex="/home/bruno/tensorflow/tensorflow/examples/android/gradleBuild/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_40def85529466f50c33b69bd78ec1b5af261baf5/classes.dex" />
+    </item>
+
+</items>
