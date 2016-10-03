@@ -6,7 +6,7 @@
 // automates the process of calling out to it and copying the compiled
 // libraries back into the appropriate directory.
 
-def bazel_location = '/usr/local/bin/bazel'
+def bazel_location = '/usr/bin/bazel'
 def cpuType = 'armeabi-v7a'
 def nativeDir = 'libs/' + cpuType
 
@@ -68,5 +68,5 @@ task copyNativeLibs(type: Copy) {
 }
 
 copyNativeLibs.dependsOn buildNative
-assemble.dependsOn copyNativeLibs
-assembleDebug.dependsOn copyNativeLibs
+//assemble.dependsOn copyNativeLibs
+//assembleDebug.dependsOn copyNativeLibs

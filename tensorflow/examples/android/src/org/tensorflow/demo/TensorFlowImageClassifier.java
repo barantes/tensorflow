@@ -17,7 +17,6 @@ package org.tensorflow.demo;
 
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
-import android.os.Trace;
 import android.util.Log;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,7 +34,7 @@ public class TensorFlowImageClassifier implements Classifier {
     System.loadLibrary("tensorflow_demo");
   }
 
-  private static final String TAG = "TensorFlowImageClassifier";
+  private static final String TAG = "TFImageClassifier";
 
   // Only return this many results with at least this confidence.
   private static final int MAX_RESULTS = 3;
@@ -115,34 +114,23 @@ public class TensorFlowImageClassifier implements Classifier {
 
   @Override
   public List<Recognition> recognizeImage(final Bitmap bitmap) {
-    // Log this method so that it can be analyzed with systrace.
-    Trace.beginSection("recognizeImage");
-
-    Trace.beginSection("preprocessBitmap");
     // Preprocess the image data from 0-255 int to normalized float based
     // on the provided parameters.
     bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
     for (int i = 0; i < intValues.length; ++i) {
-      floatValues[i * 3 + 0] = ((intValues[i] & 0xFF) - imageMean) / imageStd;
+      floatValues[i * 3 + 2] = ((intValues[i] & 0xFF) - imageMean) / imageStd;
       floatValues[i * 3 + 1] = (((intValues[i] >> 8) & 0xFF) - imageMean) / imageStd;
-      floatValues[i * 3 + 2] = (((intValues[i] >> 16) & 0xFF) - imageMean) / imageStd;
+      floatValues[i * 3 + 0] = (((intValues[i] >> 16) & 0xFF) - imageMean) / imageStd;
     }
-    Trace.endSection();
 
     // Copy the input data into TensorFlow.
-    Trace.beginSection("fillNodeFloat");
     inferenceInterface.fillNodeFloat(inputName, 1, inputSize, inputSize, 3, floatValues);
-    Trace.endSection();
 
     // Run the inference call.
-    Trace.beginSection("runInference");
     inferenceInterface.runInference(outputNames);
-    Trace.endSection();
 
     // Copy the output Tensor back into the output array.
-    Trace.beginSection("readNodeFloat");
     inferenceInterface.readNodeFloat(outputName, outputs);
-    Trace.endSection();
 
     // Find the best classifications.
     PriorityQueue<Recognition> pq = new PriorityQueue<Recognition>(3,
@@ -163,7 +151,6 @@ public class TensorFlowImageClassifier implements Classifier {
     for (int i = 0; i < Math.min(pq.size(), MAX_RESULTS); ++i) {
       recognitions.add(pq.poll());
     }
-    Trace.endSection(); // "recognizeImage"
     return recognitions;
   }
 
@@ -172,3 +159,4 @@ public class TensorFlowImageClassifier implements Classifier {
     inferenceInterface.close();
   }
 }
+

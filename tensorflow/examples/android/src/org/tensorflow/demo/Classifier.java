@@ -50,7 +50,7 @@ public interface Classifier {
     private final RectF location;
 
     public Recognition(
-        final String id, final String title, final Float confidence, final RectF location) {
+            final String id, final String title, final Float confidence, final RectF location) {
       this.id = id;
       this.title = title;
       this.confidence = confidence;
@@ -76,21 +76,22 @@ public interface Classifier {
     @Override
     public String toString() {
       String resultString = "";
-      if (id != null) {
-        resultString += "[" + id + "] ";
-      }
+//      if (id != null) {
+//        resultString += "[" + id + "] ";
+//      }
 
       if (title != null) {
         resultString += title + " ";
       }
 
       if (confidence != null) {
-        resultString += String.format("(%.1f%%) ", confidence * 100.0f);
+//        resultString += String.format("(%.1f%%) ", confidence * 100.0f);
+        resultString += confidence;
       }
 
-      if (location != null) {
-        resultString += location + " ";
-      }
+//      if (location != null) {
+//        resultString += location + " ";
+//      }
 
       return resultString.trim();
     }

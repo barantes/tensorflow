@@ -16,6 +16,7 @@ limitations under the License.
 #define THIRD_PARTY_TENSORFLOW_EXAMPLES_ANDROID_JNI_LIMITING_FILE_INPUT_STREAM_H_
 
 #include <unistd.h>
+#include <errno.h>
 #include "google/protobuf/io/zero_copy_stream_impl.h"
 #include "google/protobuf/io/zero_copy_stream_impl_lite.h"
 
